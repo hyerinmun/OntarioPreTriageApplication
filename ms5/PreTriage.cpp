@@ -138,7 +138,7 @@ namespace seneca {
         int rowNumber = 0;
         for (int i = 0; i < m_lineupSize; i++) {
             if (*m_lineup[i] == type || selection == 3) { // Check if patient type matches or show all
-                cout << left << setw(4) << ++rowNumber << " - ";
+                cout << left << setw(4) << ++rowNumber << "- ";
                 m_lineup[i]->write(clog) << endl; // Delegate to patient's write method
                 isEmpty = false;
             }
