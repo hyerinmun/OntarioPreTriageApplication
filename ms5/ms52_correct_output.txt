@@ -1,0 +1,75 @@
+Loading data...
+16 Records imported...
+
+General Healthcare Facility Pre-Triage Application
+1- Register
+2- Admit
+3- View Lineup
+0- Exit
+> 3
+   Select The Lineup:
+   1- Contagion Test
+   2- Triage
+   0- Exit
+   > 1
+Row - Patient name                                          OHIP     Tk #  Time
+-------------------------------------------------------------------------------
+1   - Apu Nahasapeemapetilon...............................684689164   18 08:04
+2   - Chief Clancy Wiggum..................................448762564   19 08:26
+3   - Dewey Largo..........................................712691397   20 08:34
+4   - Eddie................................................547723561   21 08:42
+5   - Jasper Beardly.......................................119258893   22 09:14
+6   - Lenny Leonard........................................587869296   23 09:38
+7   - Martin Prince........................................666834410   25 09:54
+-------------------------------------------------------------------------------
+General Healthcare Facility Pre-Triage Application
+1- Register
+2- Admit
+3- View Lineup
+0- Exit
+> 3
+   Select The Lineup:
+   1- Contagion Test
+   2- Triage
+   0- Exit
+   > 2
+Row - Patient name                                          OHIP     Tk #  Time
+-------------------------------------------------------------------------------
+1   - Barney Gumble........................................350158143   12 08:10
+2   - Murphy Brown.........................................763006002   13 08:18
+3   - Edna Krabappel.......................................435676529   14 08:50
+4   - Itchy................................................253789913   15 08:58
+5   - Janey Powell.........................................319153275   16 09:06
+6   - Kent Brockman........................................483681036   17 09:22
+7   - Krusty The Clown.....................................950529072   18 09:30
+8   - Lou..................................................152561791   24 09:46
+9   - Marvin Monroe........................................617902450   19 10:02
+-------------------------------------------------------------------------------
+General Healthcare Facility Pre-Triage Application
+1- Register
+2- Admit
+3- View Lineup
+0- Exit
+> 0
+Saving lineup...
+7 Contagion Tests and 9 Triage records were saved!
+
+******  Content of file: "smalldata.csv":
+00:05,00:07
+C,Apu Nahasapeemapetilon,684689164,18,08:04
+T,Barney Gumble,350158143,12,08:10,Nausea-Vomiting-Abdominal Pain
+T,Murphy Brown,763006002,13,08:18,Pounding headache
+C,Chief Clancy Wiggum,448762564,19,08:26
+C,Dewey Largo,712691397,20,08:34
+C,Eddie,547723561,21,08:42
+T,Edna Krabappel,435676529,14,08:50,Muscle tension-Nausea-Photosensitivity
+T,Itchy,253789913,15,08:58,Chest Pain-Lightheadedness-Pain radiates to arm
+T,Janey Powell,319153275,16,09:06,Fatigue-Dry mouth-Stomach pain
+C,Jasper Beardly,119258893,22,09:14
+T,Kent Brockman,483681036,17,09:22,Cramps-Bloating-Backpain-Fatigue
+T,Krusty The Clown,950529072,18,09:30,Upset Stomach-Headache-Chills-Redness of left eye
+C,Lenny Leonard,587869296,23,09:38
+T,Lou,152561791,24,09:46,Abdominal Pain
+C,Martin Prince,666834410,25,09:54
+T,Marvin Monroe,617902450,19,10:02,Fever-Sore throat-Red blisters on tonge hand and feet
+***************************************************

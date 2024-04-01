@@ -1,0 +1,142 @@
+Script started on Thu 29 Feb 2024 11:50:06 PM EST
+==183019== Memcheck, a memory error detector
+==183019== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==183019== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==183019== Command: ws.exe
+==183019== 
+Milestone 4 tester
+Testing TestPatient:
+Enter the following values when prompted:
+aaa
+123123123
+------------------------
+
+Enter Patient information:
+Name: aaa
+OHIP: 123123123
+
+Enter the following values when prompted:
+bbb
+234234234
+------------------------
+
+Enter Patient information:
+Name: bbb
+OHIP: 234234234
+
+Patients information entered:
+Contagion TEST
+Ticket No: 1, Issued at: 12:34
+aaa, OHIP: 123123123
+
+Contagion TEST
+Ticket No: 2, Issued at: 12:37
+bbb, OHIP: 234234234
+
+CSV output:
+C,aaa,123123123,1,12:34
+C,bbb,234234234,2,12:37
+
+Linear output:
+aaa..................................................123123123    1 12:34
+bbb..................................................234234234    2 12:37
+
+Testing CSV input;
+   Reading "ccc,333333333,10,23:45" from input.txt.
+
+Data read:
+Contagion TEST
+Ticket No: 10, Issued at: 23:45
+ccc, OHIP: 333333333
+
+Testing global ticket number variable:
+Enter the following values when prompted:
+ddd
+345345345
+------------------------
+
+Name: ddd
+OHIP: 345345345
+Patient information entered:
+Contagion TEST
+Ticket No: 11, Issued at: 23:55
+ddd, OHIP: 345345345
+
+Testing TriagePatient:
+Enter the following values when prompted:
+aaa
+123123123
+aaa aaa aaa
+------------------------
+
+Enter Patient information:
+Name: aaa
+OHIP: 123123123
+Symptoms: aaa aaa aaa
+
+Enter the following values when prompted:
+bbb
+234234234
+bbb bbb bbb
+------------------------
+
+Enter Patient information:
+Name: bbb
+OHIP: 234234234
+Symptoms: bbb bbb bbb
+
+Patients information entered:
+TRIAGE
+Ticket No: 1, Issued at: 12:34
+aaa, OHIP: 123123123
+Symptoms: aaa aaa aaa
+
+TRIAGE
+Ticket No: 2, Issued at: 12:54
+bbb, OHIP: 234234234
+Symptoms: bbb bbb bbb
+
+CSV output: 
+T,aaa,123123123,1,12:34,aaa aaa aaa
+T,bbb,234234234,2,12:54,bbb bbb bbb
+
+Linear output:
+aaa..................................................123123123    1 12:34
+bbb..................................................234234234    2 12:54
+
+Testing CSV input;
+   Reading "ccc,333333333,10,23:45,ccc ccc ccc" from input.txt.
+
+Data read:
+TRIAGE
+Ticket No: 10, Issued at: 23:45
+ccc, OHIP: 333333333
+Symptoms: ccc ccc ccc
+
+Testing global ticket number variable:
+Enter the following values when prompted:
+ddd
+444444444
+ddd ddd ddd
+------------------------
+
+Name: ddd
+OHIP: 444444444
+Symptoms: ddd ddd ddd
+
+Patient information entered:
+TRIAGE
+Ticket No: 11, Issued at: 23:55
+ddd, OHIP: 444444444
+Symptoms: ddd ddd ddd
+
+==183019== 
+==183019== HEAP SUMMARY:
+==183019==     in use at exit: 0 bytes in 0 blocks
+==183019==   total heap usage: 19 allocs, 19 frees, 83,592 bytes allocated
+==183019== 
+==183019== All heap blocks were freed -- no leaks are possible
+==183019== 
+==183019== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+Script done on Thu 29 Feb 2024 11:50:50 PM EST

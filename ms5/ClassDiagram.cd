@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="seneca::IOAble" Collapsed="true">
+    <Position X="5.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAICAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>IOAble.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="seneca::Patient" Collapsed="true">
+    <Position X="6" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAABAACAAAAAQQCEACIAAQAAAAABAAAAIQAgAAAACAA=</HashCode>
+      <FileName>Patient.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="seneca::TestPatient" Collapsed="true">
+    <Position X="6" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAACAAAAAAAAABAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>TestPatient.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="seneca::TriagePatient" Collapsed="true">
+    <Position X="8.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAYAAAAAAAAAACAAAAAAAAABAAAAAQAgAABAAAA=</HashCode>
+      <FileName>TriagePatient.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="seneca::Ticket" Collapsed="true">
+    <Position X="8.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABABAAAAAAAAQAACACEAAACAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Ticket.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="seneca::Menu" Collapsed="true">
+    <Position X="7" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAABAAgAAAgAAAgAAAAEIAAAAAAAgAAAAABA=</HashCode>
+      <FileName>Menu.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="seneca::Time" Collapsed="true">
+    <Position X="8.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEEAAgAAAAAACAAAQAAAAAAAAAAAQAgAAAAAQA=</HashCode>
+      <FileName>Time.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
