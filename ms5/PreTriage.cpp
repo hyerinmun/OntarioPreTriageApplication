@@ -168,8 +168,8 @@ namespace seneca {
         }
 
         cout << "\n******************************************\n";
-        cout << "Call time: " << endl;
-        cout << "Calling at for " << *m_lineup[index];
+        cout << "Call time: " << m_lineup[index]->time();
+        cout << "\nCalling at for " << *m_lineup[index];
         cout << "******************************************\n\n";
 
         setAverageWaitTime(*m_lineup[index]);
