@@ -91,27 +91,15 @@ namespace seneca {
             }
             else if (&ostr == &clog) {
                 ostr << left << setw(53) << setfill('.') << m_name
-                    << right << setw(9) << m_OHIP
-                    << setfill(' ') << setw(5) << m_ticket.number() << " " << m_ticket.time();
+                    << right << setw(9) << m_OHIP << setfill(' ') << setw(5) << m_ticket.number() << " " << m_ticket.time();
             }
-            else {
-                // For other ostream types, defer to csvWrite
-                return csvWrite(ostr);
+            else { // For other ostream types, write CSV format
+                ostr << type() << ',' << m_name << ',' << m_OHIP << ',';
+                m_ticket.write(ostr);
             }
         }
         else {
             ostr << "Invalid Patient Record" << endl;
-        }
-        return ostr;
-    }
-
-    ostream& Patient::csvWrite(ostream& ostr) const {
-        if (*this) { 
-            ostr << type() << ',' << m_name << ',' << m_OHIP << ',';
-            m_ticket.write(ostr); 
-        }
-        else {
-            ostr << "Invalid Patient Record"; 
         }
         return ostr;
     }
@@ -145,35 +133,28 @@ namespace seneca {
                     break;
                 }
             }
+
+            m_ticket.read(istr);
         }
         else {
-            // For non-interactive input, use csvRead
-            return csvRead(istr);
+            char tempName[100];
+            istr.get(tempName, 100, ',');
+            delete[] m_name;
+            m_name = new char[strlen(tempName) + 1];
+            strcpy(m_name, tempName);
+            istr.ignore(1000, ','); 
+
+            // Read OHIP
+            istr >> m_OHIP;
+            if (istr.fail() || m_OHIP < 100000000 || m_OHIP > 999999999) {
+                istr.clear();
+                m_OHIP = 0;
+            }
+            istr.ignore(1000, ',');
+
+            m_ticket.read(istr);
         }
         return istr;
    }
-
-    istream& Patient::csvRead(istream & istr) {
-    char tempName[100];
-
-    // Read the name
-    istr.get(tempName, 100, ',');
-    delete[] m_name;
-    m_name = new char[strlen(tempName) + 1];
-    strcpy(m_name, tempName);
-    istr.ignore(1000, ','); // Skip past the comma
-
-    // Read OHIP
-    istr >> m_OHIP;
-    if (istr.fail() || m_OHIP < 100000000 || m_OHIP > 999999999) {
-        istr.clear();
-        m_OHIP = 0;
-    }
-    istr.ignore(1000, ',');
-
-    m_ticket.read(istr);
-
-    return istr;
-}
 
 }

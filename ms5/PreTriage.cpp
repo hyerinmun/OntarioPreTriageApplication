@@ -39,7 +39,7 @@ namespace seneca {
                 }
 
                 if (patient != nullptr) {
-                    if (patient->csvRead(file)) {
+                    if (patient->read(file)) {
                         m_lineup[m_lineupSize++] = patient;
                         recordsRead++;
                     }
@@ -77,7 +77,7 @@ namespace seneca {
             if (m_lineup[i]->type() == 'C') ++cntContagion;
             else if (m_lineup[i]->type() == 'T') ++cntTriage;
 
-            m_lineup[i]->csvWrite(file) << '\n';
+            m_lineup[i]->write(file) << '\n';
         }
 
         cout << cntContagion << " Contagion Tests and "

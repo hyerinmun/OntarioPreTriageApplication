@@ -12,29 +12,22 @@ namespace seneca {
         return 'C';
     }
 
-    ostream& TestPatient::csvWrite(ostream& ostr) const {
-        return Patient::write(ostr);
-    }
-
-    istream& TestPatient::csvRead(istream& istr) {
-        Patient::read(istr);
-        nextTestTicket = Patient::number() + 1;
-        return istr;
-    }
 
     ostream& TestPatient::write(ostream& ostr) const {
         if (&ostr == &cout) {
             ostr << "Contagion TEST\n";
         }
-        Patient::write(ostr);
+        Patient::write(ostr); 
         return ostr;
     }
 
     istream& TestPatient::read(istream& istr) {
         Patient::read(istr);
         if (&istr != &cin) {
-            nextTestTicket = Patient::number() + 1;
+            nextTestTicket = number() + 1;
         }
         return istr;
     }
+ 
+   
 }

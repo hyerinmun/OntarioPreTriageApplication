@@ -38,11 +38,9 @@ namespace seneca {
         //If a patient is casted to a constant character pointer, return the address of the patient's name
         operator const char* () const;
 
-         ostream& write(ostream& ostr) const;
-         ostream& csvWrite(ostream& ostr) const;
+        virtual ostream& write(ostream& ostr) const;
 
-         istream& read(istream& istr);
-         istream& csvRead(istream & istr);
+        virtual istream& read(istream& istr);
     };
 
 }

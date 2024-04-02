@@ -15,10 +15,9 @@ namespace seneca {
 
         virtual char type() const;
 
-         ostream& write(ostream& ostr) const ;
-         istream& read(istream& istr) ;
-        ostream& csvWrite(ostream& ostr) const ;
-        istream& csvRead(istream& istr) ;
+        virtual ostream& write(ostream& ostr) const override;
+        virtual istream& read(istream& istr) override;
+        
    
     };
 }
