@@ -13,7 +13,7 @@ namespace seneca {
     };
 
     ostream& operator<<(ostream& ostr, const IOAble& IO);
-    istream& operator>>(std::istream& istr, IOAble& IO);
+    istream& operator>>(istream& istr, IOAble& IO);
 }
 
 #endif // SENECA_IOABLE_H
