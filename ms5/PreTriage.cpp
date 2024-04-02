@@ -88,7 +88,7 @@ namespace seneca {
     void PreTriage::setAverageWaitTime(const Patient& p) {
         Time CT, PTT = p.time(); // CT: Current Time, PTT: Patient's Ticket Time
         int PTN = p.number();    // PTN: Patient's Ticket Number
-        Time AWT = (p.type() == 'C' ? m_averCovidWait : m_averTriageWait); // AWT: Average Wait Time
+        Time& AWT = (p.type() == 'C' ? m_averCovidWait : m_averTriageWait); // AWT: Average Wait Time
 
         AWT = ((CT - PTT) + (AWT * (PTN - 1))) / PTN;
 
@@ -167,8 +167,10 @@ namespace seneca {
             return;
         }
 
+        Time callTime = m_lineup[index]->time() + (type == 'C' ? m_averCovidWait : m_averTriageWait);
+        // Time callTime =currentTime+(type == 'C' ? m_averCovidWait : m_averTriageWait);
         cout << "\n******************************************\n";
-        cout << "Call time: " << m_lineup[index]->time();
+        cout << "Call time: " << "[" << callTime << "]";
         cout << "\nCalling at for " << *m_lineup[index];
         cout << "******************************************\n\n";
 
