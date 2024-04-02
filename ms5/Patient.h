@@ -39,7 +39,7 @@ namespace seneca {
         operator const char* () const;
 
          ostream& write(ostream& ostr) const;
-         ostream& csvWrite(std::ostream& ostr) const;
+         ostream& csvWrite(ostream& ostr) const;
 
          istream& read(istream& istr);
          istream& csvRead(istream & istr);

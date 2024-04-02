@@ -2,6 +2,8 @@
 #define SENECA_TRIAGEPATIENT_H
 #include "Patient.h"
 
+using namespace std;
+
 namespace seneca {
     class TriagePatient : public Patient {
         static int nextTriageTicket;
@@ -15,7 +17,7 @@ namespace seneca {
 
          ostream& write(ostream& ostr) const ;
          istream& read(istream& istr) ;
-        ostream& csvWrite(std::ostream& ostr) const ;
+        ostream& csvWrite(ostream& ostr) const ;
         istream& csvRead(istream& istr) ;
    
     };

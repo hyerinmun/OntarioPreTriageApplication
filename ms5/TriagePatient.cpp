@@ -34,7 +34,7 @@ namespace seneca {
         }
         return ostr;
     }
-    ostream& TriagePatient::csvWrite(std::ostream& ostr) const {
+    ostream& TriagePatient::csvWrite(ostream& ostr) const {
         Patient::csvWrite(ostr); 
         ostr << ',' << (symptoms ? symptoms : ""); 
         return ostr;
@@ -43,7 +43,7 @@ namespace seneca {
         if (&istr == &cin) {
             Patient::read(istr); 
 
-            std::cout << "Symptoms: ";
+            cout << "Symptoms: ";
             delete[] symptoms;
             symptoms = nullptr;
 

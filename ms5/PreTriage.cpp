@@ -67,8 +67,8 @@ namespace seneca {
     }
 
     void PreTriage::save() const {
-        std::cout << "Saving lineup..." << std::endl;
-        std::ofstream file(m_dataFilename);
+        cout << "Saving lineup..." << endl;
+        ofstream file(m_dataFilename);
 
         file << m_averCovidWait << ',' << m_averTriageWait << '\n';
 
@@ -80,8 +80,8 @@ namespace seneca {
             m_lineup[i]->csvWrite(file) << '\n';
         }
 
-        std::cout << cntContagion << " Contagion Tests and "
-            << cntTriage << " Triage records were saved!" << std::endl;
+        cout << cntContagion << " Contagion Tests and "
+            << cntTriage << " Triage records were saved!" << endl;
     }
 
     PreTriage::PreTriage(const char* dataFilename) : m_averCovidWait(15), m_averTriageWait(5), m_lineupSize(0) {

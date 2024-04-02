@@ -3,6 +3,9 @@
 #include <iostream>
 #include "Time.h"
 #include "IOAble.h"
+
+using namespace std;
+
 namespace seneca {
     class Ticket :public IOAble {
         Time m_time;
@@ -12,8 +15,8 @@ namespace seneca {
         Time time()const;
         int number()const;
         void resetTime();
-        std::ostream& write(std::ostream& ostr)const;
-        std::istream& read(std::istream& istr);
+        ostream& write(ostream& ostr)const;
+        istream& read(istream& istr);
     };
 }
 #endif // !SENECA_TICKET_H_

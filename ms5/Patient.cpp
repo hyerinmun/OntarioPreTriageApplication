@@ -74,10 +74,10 @@ namespace seneca {
         return m_name;
     }
 
-    std::ostream& Patient::write(std::ostream& ostr) const {
+    ostream& Patient::write(ostream& ostr) const {
         if (*this) { // Valid patient
-            if (&ostr == &std::cout) {
-                m_ticket.write(ostr) << std::endl;
+            if (&ostr == &cout) {
+                m_ticket.write(ostr) << endl;
                 if (strlen(m_name) > 50) {
                     char truncatedName[51];
                     strncpy(truncatedName, m_name, 50);
@@ -87,12 +87,12 @@ namespace seneca {
                 else {
                     ostr << m_name;
                 }
-                ostr << ", OHIP: " << m_OHIP << std::endl;
+                ostr << ", OHIP: " << m_OHIP << endl;
             }
-            else if (&ostr == &std::clog) {
-                ostr << std::left << std::setw(53) << std::setfill('.') << m_name
-                    << std::right << std::setw(9) << m_OHIP
-                    << std::setfill(' ') << std::setw(5) << m_ticket.number() << " " << m_ticket.time();
+            else if (&ostr == &clog) {
+                ostr << left << setw(53) << setfill('.') << m_name
+                    << right << setw(9) << m_OHIP
+                    << setfill(' ') << setw(5) << m_ticket.number() << " " << m_ticket.time();
             }
             else {
                 // For other ostream types, defer to csvWrite
@@ -100,12 +100,12 @@ namespace seneca {
             }
         }
         else {
-            ostr << "Invalid Patient Record" << std::endl;
+            ostr << "Invalid Patient Record" << endl;
         }
         return ostr;
     }
 
-    ostream& Patient::csvWrite(std::ostream& ostr) const {
+    ostream& Patient::csvWrite(ostream& ostr) const {
         if (*this) { 
             ostr << type() << ',' << m_name << ',' << m_OHIP << ',';
             m_ticket.write(ostr); 
@@ -117,7 +117,7 @@ namespace seneca {
     }
 
    istream& Patient::read(istream& istr) {
-        if (&istr == &std::cin) {
+        if (&istr == &cin) {
             char buffer[51];
             cout << "Name: ";
             istr.get(buffer, 51, '\n');
@@ -153,7 +153,7 @@ namespace seneca {
         return istr;
    }
 
-    istream& Patient::csvRead(std::istream & istr) {
+    istream& Patient::csvRead(istream & istr) {
     char tempName[100];
 
     // Read the name
