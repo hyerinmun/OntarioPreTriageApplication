@@ -17,10 +17,12 @@ namespace seneca {
 
     void PreTriage::load() {
         cout << "Loading data..." << endl;
+
         ifstream file(m_dataFilename);
+
         if (file) {
             file >> m_averCovidWait;
-            file.ignore();
+            file.ignore(1000, ',');
             file >> m_averTriageWait;
             file.ignore(1000, '\n');
 
@@ -46,7 +48,7 @@ namespace seneca {
                     else {
                         delete patient;  // If reading failed, clean up
                     }
-                    file.ignore(1000, '\n');  // Skip to the end of the line
+                    //file.ignore(1000, '\n');  // Skip to the end of the line
                 }
             }
 
