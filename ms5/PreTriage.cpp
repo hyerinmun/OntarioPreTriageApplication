@@ -48,7 +48,6 @@ namespace seneca {
                     else {
                         delete patient;  // If reading failed, clean up
                     }
-                    //file.ignore(1000, '\n');  // Skip to the end of the line
                 }
             }
 
@@ -86,6 +85,31 @@ namespace seneca {
             << cntTriage << " Triage records were saved!" << endl;
     }
 
+    void PreTriage::setAverageWaitTime(const Patient& p) {
+        Time CT, PTT = p.time(); // CT: Current Time, PTT: Patient's Ticket Time
+        int PTN = p.number();    // PTN: Patient's Ticket Number
+        Time AWT = (p.type() == 'C' ? m_averCovidWait : m_averTriageWait); // AWT: Average Wait Time
+
+        AWT = ((CT - PTT) + (AWT * (PTN - 1))) / PTN;
+
+        if (p.type() == 'C') {
+            m_averCovidWait = AWT;
+        }
+        else {
+            m_averTriageWait = AWT;
+        }
+    }
+
+    int PreTriage::indexOfFirstInLine(char type) const {
+        for (int i = 0; i < m_lineupSize; i++) {
+            if (*m_lineup[i] == type) {
+                return i;
+            }
+        }
+        return -1; // No match found
+    }
+
+
     PreTriage::PreTriage(const char* dataFilename) : m_averCovidWait(15), m_averTriageWait(5), m_lineupSize(0) {
         m_dataFilename = new char[strlen(dataFilename) + 1];
         strcpy(m_dataFilename, dataFilename);
@@ -114,7 +138,7 @@ namespace seneca {
                 //registerPatient();
                 break;
             case 2:
-                //admitPatient();
+                admitPatient();
                 break;
             case 3:
                 lineUp();
@@ -123,6 +147,40 @@ namespace seneca {
         } while (selection != 0);
         //cout << "Exiting the program.\n";
     }
+
+    void PreTriage::admitPatient() {
+        Time currentTime;
+        int selection = 0;
+        char type = '\0';
+        Menu admitMenu("Select Type of Admittance:\n1- Contagion Test\n2- Triage", 3);
+        admitMenu >> selection;
+
+        switch (selection) {
+        case 1: type = 'C'; break;
+        case 2: type = 'T'; break;
+        default: return;
+        }
+
+        int index = indexOfFirstInLine(type);
+        if (index == -1) {
+            cout << "No patient to admit\n";
+            return;
+        }
+
+        cout << "\n******************************************\n";
+        cout << "Call time: " << endl;
+        cout << "Calling at for " << *m_lineup[index];
+        cout << "******************************************\n\n";
+
+        setAverageWaitTime(*m_lineup[index]);
+        delete m_lineup[index];
+
+        for (int i = index; i < m_lineupSize - 1; ++i) {
+            m_lineup[i] = m_lineup[i + 1];
+        }
+        m_lineup[--m_lineupSize] = nullptr;
+    }
+
 
     void PreTriage::lineUp() const {
         int selection = 0;
