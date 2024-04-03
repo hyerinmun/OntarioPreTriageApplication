@@ -17,16 +17,16 @@ namespace seneca {
         void load();
         void save() const;
 
-        //int getWaitTime(const Patient& p) const;
-       void setAverageWaitTime(const Patient& p);
-       int indexOfFirstInLine(char type) const;
+        int getWaitTime(const Patient& p) const;
+        void setAverageWaitTime(const Patient& p);
+        int indexOfFirstInLine(char type) const;
 
 
     public:
         PreTriage(const char* dataFilename);
         ~PreTriage();
         void run();
-        //void registerPatient();
+        void registerPatient();
         void admitPatient();
         void lineUp() const;
     };

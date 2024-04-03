@@ -15,7 +15,7 @@ namespace seneca {
    void Ticket::resetTime() {
       m_time.reset();
    }
-   std::ostream& Ticket::write(std::ostream& ostr) const {
+   ostream& Ticket::write(ostream& ostr) const {
       if (&ostr != &cout) {
          ostr << m_number << "," << m_time;
       }
@@ -24,9 +24,10 @@ namespace seneca {
       }
       return  ostr;
    }
-   std::istream& Ticket::read(std::istream& istr) {
+   istream& Ticket::read(istream& istr) {
       istr >> m_number;
-      istr.ignore();
+      istr.ignore(1000, ',');
+
       return istr >> m_time;
    }
 }

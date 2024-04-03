@@ -85,6 +85,19 @@ namespace seneca {
             << cntTriage << " Triage records were saved!" << endl;
     }
 
+    int PreTriage::getWaitTime(const Patient& p) const {
+        int count = 0;
+        char type = p.type(); 
+
+        for (int i = 0; i < m_lineupSize; ++i) {
+            if (m_lineup[i]->type() == type) {
+                count++;
+            }
+        }
+        int averageWaitTime = (type == 'C' ? m_averCovidWait : m_averTriageWait);
+        return (count + 1) * averageWaitTime;
+    }
+
     void PreTriage::setAverageWaitTime(const Patient& p) {
         Time CT; 
         CT.reset(); 
@@ -136,7 +149,7 @@ namespace seneca {
             mainMenu >> selection;
             switch (selection) {
             case 1:
-                //registerPatient();
+                registerPatient();
                 break;
             case 2:
                 admitPatient();
@@ -148,6 +161,43 @@ namespace seneca {
         } while (selection != 0);
         //cout << "Exiting the program.\n";
     }
+
+    void PreTriage::registerPatient() {
+        if (m_lineupSize >= MAX_NO_OF_PATIENTS) {
+            cout << "Line up full!" << endl;
+            return;
+        }
+
+        int selection = 0;
+        Menu patientTypeMenu("Select Type of Registration:\n1- Contagion Test\n2- Triage", 3);
+        patientTypeMenu >> selection;
+
+        Patient* patient = nullptr;
+        switch (selection) {
+        case 1:
+            patient = new TestPatient();
+            break;
+        case 2:
+            patient = new TriagePatient();
+            break;
+        default:
+            cout << "Invalid selection. Returning to main menu." << endl;
+            return; 
+        }
+        cout << "Please enter patient information: " << endl;
+        cin >> *patient; 
+        cin.clear();
+        cout << "\n******************************************" << endl
+            << *patient
+            //i think getWaitTime works as expected, but the format is not in [00:00]
+            // 288 => 4*60 = 240, and 48 => 04:48
+            // 324 => 5*60 = 300, and 24 => 05:24
+            << "Estimated Wait Time: " << getWaitTime(*patient) << endl
+            << "******************************************\n\n";
+
+        m_lineup[m_lineupSize++] = patient; 
+    }
+
 
     void PreTriage::admitPatient() {
         int selection = 0;
@@ -167,20 +217,16 @@ namespace seneca {
             return;
         }
 
-        // Current system time instantiation
         Time currentTime;
-        currentTime.reset();  // Assuming reset() sets currentTime to the current system time
+        currentTime.reset();  
 
-        // Displaying call time based on current system time instead of adding wait time to patient's ticket time
         cout << "\n******************************************\n";
         cout << "Call time: " << "[" << currentTime << "]";
         cout << "\nCalling at for " << *m_lineup[index];
         cout << "******************************************\n\n";
 
-        // Updating average wait time before removing the patient from the lineup
         setAverageWaitTime(*m_lineup[index]);
 
-        // Remove the patient from the lineup
         delete m_lineup[index];
         for (int i = index; i < m_lineupSize - 1; ++i) {
             m_lineup[i] = m_lineup[i + 1];
@@ -201,12 +247,12 @@ namespace seneca {
         cout << "Row - Patient name                                          OHIP     Tk #  Time\n";
         cout << "-------------------------------------------------------------------------------\n";
 
-        bool isEmpty = true; // Track if any patient is printed
+        bool isEmpty = true; 
         int rowNumber = 0;
         for (int i = 0; i < m_lineupSize; i++) {
-            if (*m_lineup[i] == type || selection == 3) { // Check if patient type matches or show all
+            if (*m_lineup[i] == type || selection == 3) { 
                 cout << left << setw(4) << ++rowNumber << "- ";
-                m_lineup[i]->write(clog) << endl; // Delegate to patient's write method
+                m_lineup[i]->write(clog) << endl;
                 isEmpty = false;
             }
         }

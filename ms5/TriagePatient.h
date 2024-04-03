@@ -17,8 +17,6 @@ namespace seneca {
 
         virtual ostream& write(ostream& ostr) const override;
         virtual istream& read(istream& istr) override;
-        
-   
     };
 }
 

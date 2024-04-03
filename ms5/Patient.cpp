@@ -133,7 +133,9 @@ namespace seneca {
                     break;
                 }
             }
-
+            //when i remove line 139, it put the correct output for ticket number but
+            // i dont think it's through the ticket read bc it doesnt read the time
+            //when i not comment line 139, it asks me to enter console input for m_number
             m_ticket.read(istr);
         }
         else {
@@ -147,13 +149,16 @@ namespace seneca {
             // Read OHIP
             istr >> m_OHIP;
             if (istr.fail() || m_OHIP < 100000000 || m_OHIP > 999999999) {
-                istr.clear();
+                delete[] m_name;
+                m_name = nullptr;
                 m_OHIP = 0;
+                istr.clear();
             }
             istr.ignore(1000, ',');
 
             m_ticket.read(istr);
         }
+       
         return istr;
    }
 
