@@ -25,9 +25,11 @@ namespace seneca {
       return  ostr;
    }
    istream& Ticket::read(istream& istr) {
-      istr >> m_number;
-      istr.ignore(1000, ',');
-
-      return istr >> m_time;
+       if (&istr != &cin) { 
+           istr >> m_number;
+           istr.ignore(1000, ',');
+           istr >> m_time;
+       }
+       return istr;
    }
 }

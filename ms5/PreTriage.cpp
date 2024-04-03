@@ -184,15 +184,19 @@ namespace seneca {
             cout << "Invalid selection. Returning to main menu." << endl;
             return; 
         }
+
+        patient->setArrivalTime();
+
         cout << "Please enter patient information: " << endl;
         cin >> *patient; 
         cin.clear();
+
+        int waitTimeMinutes = getWaitTime(*patient);
+        Time waitTimeFormatted(waitTimeMinutes);
+
         cout << "\n******************************************" << endl
             << *patient
-            //i think getWaitTime works as expected, but the format is not in [00:00]
-            // 288 => 4*60 = 240, and 48 => 04:48
-            // 324 => 5*60 = 300, and 24 => 05:24
-            << "Estimated Wait Time: " << getWaitTime(*patient) << endl
+            << "Estimated Wait Time: " << waitTimeFormatted << endl
             << "******************************************\n\n";
 
         m_lineup[m_lineupSize++] = patient; 

@@ -67,5 +67,6 @@ namespace seneca {
        }
        return val;
    }
+
    // end provided code
 }
