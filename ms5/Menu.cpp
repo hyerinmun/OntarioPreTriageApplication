@@ -26,7 +26,7 @@ namespace seneca {
         delete[] m_text;
     }
 
-    std::ostream& Menu::display(std::ostream& ostr) const {
+    ostream& Menu::display(ostream& ostr) const {
         if (m_text != nullptr) {
             const char* p = m_text;
             bool isNewLine = true;
@@ -47,13 +47,13 @@ namespace seneca {
                 p++;
             }
 
-            ostr << std::endl;
+            ostr << endl;
             if (m_tabs > 0) {
                 for (int i = 0; i < m_tabs; i++) {
                     ostr << ' '; 
                 }
             }
-            ostr << "0- Exit" << std::endl;
+            ostr << "0- Exit" << endl;
             for (int i = 0; i < m_tabs; i++) {
                 ostr << ' '; 
             }
@@ -65,29 +65,8 @@ namespace seneca {
 
     int& Menu::operator>>(int& selection) {
         display();
-        while (true) { 
-            std::cin >> selection;
-            if (std::cin.fail()) {
-                std::cin.clear(); 
-                std::cin.ignore(1000, '\n'); 
-                std::cout << "Bad integer value, try again: ";
-            }
-            else if (selection < 0 || selection > m_numOptions) {
-                std::cout << "Invalid value enterd, retry[0 <= value <= " << m_numOptions << "]: ";
-                std::cin.ignore(1000, '\n');
-            }
-            else {
+        selection = U.getInt(0, m_numOptions);
 
-                char nextChar = std::cin.get();
-                if (nextChar != '\n') {
-                    std::cout << "Only enter an integer, try again: ";
-                    std::cin.ignore(1000, '\n');
-                }
-                else {
-                    break; 
-                }
-            }
-        }
         return selection;
     }
 }

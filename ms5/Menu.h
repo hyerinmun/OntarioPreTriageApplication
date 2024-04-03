@@ -1,7 +1,9 @@
-// Menu.h
 #ifndef SENECA_MENU_H
 #define SENECA_MENU_H
 #include <iostream>
+#include "Utils.h"
+
+using namespace std;
 
 namespace seneca {
     class Menu {
@@ -15,7 +17,7 @@ namespace seneca {
         Menu(const Menu&) = delete; 
         Menu& operator=(const Menu&) = delete; 
 
-        std::ostream& display(std::ostream& ostr = std::cout) const;
+        ostream& display(ostream& ostr = cout) const;
         int& operator>>(int& selection); 
     };
 }

@@ -3,6 +3,7 @@
 #include "Time.h"
 #include "Utils.h" 
 
+using namespace std;
 using namespace seneca;
 
 namespace seneca {
@@ -13,27 +14,27 @@ namespace seneca {
 
     Time::Time(unsigned int min) : minutes(min) {}
 
-    std::ostream& Time::write(std::ostream& ostr) const {
-        ostr << std::setw(2) << std::setfill('0') << minutes / 60 << ":" << std::setw(2) << minutes % 60;
+    ostream& Time::write(ostream& ostr) const {
+        ostr << setw(2) << setfill('0') << minutes / 60 << ":" << setw(2) << minutes % 60;
         ostr.fill(' ');
         return ostr;
     }
 
-    std::istream& Time::read(std::istream& istr) {
+    istream& Time::read(istream& istr) {
         int hours, minutes;
         char colon[2];
 
         if (!(istr >> hours)) {
-            istr.setstate(std::ios::failbit);
+            istr.setstate(ios::failbit);
         }
         else {
             istr.get(colon, 2, '\n');
             if (colon[0] != ':') {
-                istr.setstate(std::ios::failbit);
+                istr.setstate(ios::failbit);
             }
             else {
                 if (!(istr >> minutes)) {
-                    istr.setstate(std::ios::failbit);
+                    istr.setstate(ios::failbit);
                 }
                 else {
 
@@ -74,11 +75,11 @@ namespace seneca {
         return temp;
     }
 
-    std::ostream& operator<<(std::ostream& ostr, const Time& time) {
+    ostream& operator<<(ostream& ostr, const Time& time) {
         return time.write(ostr);
     }
 
-    std::istream& operator>>(std::istream& istr, Time& time) {
+    istream& operator>>(istream& istr, Time& time) {
         return time.read(istr);
     }
 }

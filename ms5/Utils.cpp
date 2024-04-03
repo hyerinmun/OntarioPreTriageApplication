@@ -44,5 +44,28 @@ namespace seneca {
       for (i = 0; s1[i] && s2[i] && s1[i] == s2[i]; i++);
       return s1[i] - s2[i];
    }
+   int Utils::getInt() const
+   {
+        int val{};
+        cin >> val;
+        while (cin.fail()) {
+            cout << "Bad integer value, try again: ";
+            cin.clear();
+            cin.ignore(50, '\n');
+            cin >> val;
+        }
+        cin.ignore(50, '\n');
+        return val;
+   }
+   int Utils::getInt(int min, int max) const
+   {
+       int val = getInt();
+       while ((val < min || val > max)) {
+           cout << "Invalid value entered, retry[" << min << " <= value <= " << max << "]: ";
+           cin >> val;
+           cin.ignore(50, '\n'); 
+       }
+       return val;
+   }
    // end provided code
 }

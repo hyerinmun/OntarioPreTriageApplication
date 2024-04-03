@@ -2,6 +2,7 @@
 #define SENECA_TIME_H
 #include <iostream>
 
+using namespace std;
 namespace seneca {
     class Time {
         unsigned int minutes;
@@ -9,16 +10,16 @@ namespace seneca {
         Time& reset();
         Time(unsigned int min = 0u);
 
-        std::ostream& write(std::ostream& ostr = std::cout) const;
-        std::istream& read(std::istream& istr = std::cin);
+        ostream& write(ostream& ostr = cout) const;
+        istream& read(istream& istr = cin);
 
         operator unsigned int() const;
         Time& operator*=(int val);
         Time& operator-=(const Time& D);
         Time operator-(const Time& T) const;
 
-        friend std::ostream& operator<<(std::ostream& ostr, const Time& time);
-        friend std::istream& operator>>(std::istream& istr, Time& time);
+        friend ostream& operator<<(ostream& ostr, const Time& time);
+        friend istream& operator>>(istream& istr, Time& time);
     };
 }
 
