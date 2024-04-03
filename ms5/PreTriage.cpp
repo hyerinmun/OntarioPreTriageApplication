@@ -86,9 +86,11 @@ namespace seneca {
     }
 
     void PreTriage::setAverageWaitTime(const Patient& p) {
-        Time CT, PTT = p.time(); // CT: Current Time, PTT: Patient's Ticket Time
-        int PTN = p.number();    // PTN: Patient's Ticket Number
-        Time& AWT = (p.type() == 'C' ? m_averCovidWait : m_averTriageWait); // AWT: Average Wait Time
+        Time CT; 
+        CT.reset(); 
+        Time PTT = p.time(); 
+        int PTN = p.number(); 
+        Time& AWT = (p.type() == 'C' ? m_averCovidWait : m_averTriageWait); 
 
         AWT = ((CT - PTT) + (AWT * (PTN - 1))) / PTN;
 
@@ -106,9 +108,8 @@ namespace seneca {
                 return i;
             }
         }
-        return -1; // No match found
+        return -1; 
     }
-
 
     PreTriage::PreTriage(const char* dataFilename) : m_averCovidWait(15), m_averTriageWait(5), m_lineupSize(0) {
         m_dataFilename = new char[strlen(dataFilename) + 1];
@@ -149,7 +150,6 @@ namespace seneca {
     }
 
     void PreTriage::admitPatient() {
-        Time currentTime;
         int selection = 0;
         char type = '\0';
         Menu admitMenu("Select Type of Admittance:\n1- Contagion Test\n2- Triage", 3);
@@ -167,16 +167,21 @@ namespace seneca {
             return;
         }
 
-        Time callTime = m_lineup[index]->time() + (type == 'C' ? m_averCovidWait : m_averTriageWait);
-        // Time callTime =currentTime+(type == 'C' ? m_averCovidWait : m_averTriageWait);
+        // Current system time instantiation
+        Time currentTime;
+        currentTime.reset();  // Assuming reset() sets currentTime to the current system time
+
+        // Displaying call time based on current system time instead of adding wait time to patient's ticket time
         cout << "\n******************************************\n";
-        cout << "Call time: " << "[" << callTime << "]";
+        cout << "Call time: " << "[" << currentTime << "]";
         cout << "\nCalling at for " << *m_lineup[index];
         cout << "******************************************\n\n";
 
+        // Updating average wait time before removing the patient from the lineup
         setAverageWaitTime(*m_lineup[index]);
-        delete m_lineup[index];
 
+        // Remove the patient from the lineup
+        delete m_lineup[index];
         for (int i = index; i < m_lineupSize - 1; ++i) {
             m_lineup[i] = m_lineup[i + 1];
         }
