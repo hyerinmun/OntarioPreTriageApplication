@@ -17,7 +17,7 @@ namespace seneca {
         }
         m_numOptions = 0;
             for (const char* p = menuContent; *p; p++) {
-                if (*p == '\n') m_numOptions++;
+               m_numOptions += (*p == '\n');
             }
         }
     

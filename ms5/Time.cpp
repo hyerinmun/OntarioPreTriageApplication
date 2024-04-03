@@ -15,6 +15,7 @@ namespace seneca {
 
     std::ostream& Time::write(std::ostream& ostr) const {
         ostr << std::setw(2) << std::setfill('0') << minutes / 60 << ":" << std::setw(2) << minutes % 60;
+        ostr.fill(' ');
         return ostr;
     }
 

@@ -55,14 +55,14 @@ namespace seneca {
                 cout << "Warning: number of records exceeded " << MAX_NO_OF_PATIENTS << endl;
             }
             else if (recordsRead == 0) {
-                cout << "No data or bad data file!\n";
+                cout << "No data or bad data file!" << endl;
             }
             else {
                 cout << recordsRead << " Records imported..." << endl;
             }
         }
         else {
-            cout << "No data or bad data file!\n";
+            cout << "No data or bad data file!" << endl;
         }
         cout << endl;
     }
@@ -71,14 +71,14 @@ namespace seneca {
         cout << "Saving lineup..." << endl;
         ofstream file(m_dataFilename);
 
-        file << m_averCovidWait << ',' << m_averTriageWait << '\n';
+        file << m_averCovidWait << ',' << m_averTriageWait << endl;
 
         int cntContagion = 0, cntTriage = 0;
         for (int i = 0; i < m_lineupSize; i++) {
             if (m_lineup[i]->type() == 'C') ++cntContagion;
             else if (m_lineup[i]->type() == 'T') ++cntTriage;
 
-            m_lineup[i]->write(file) << '\n';
+            m_lineup[i]->write(file) << endl;
         }
 
         cout << cntContagion << " Contagion Tests and "
@@ -244,24 +244,23 @@ namespace seneca {
 
         char type = selection == 1 ? 'C' : 'T'; 
 
-        cout << "Row - Patient name                                          OHIP     Tk #  Time\n";
-        cout << "-------------------------------------------------------------------------------\n";
+        cout << "Row - Patient name                                          OHIP     Tk #  Time" << endl;
+        cout << "-------------------------------------------------------------------------------" << endl;
 
         bool isEmpty = true; 
         int rowNumber = 0;
         for (int i = 0; i < m_lineupSize; i++) {
             if (*m_lineup[i] == type || selection == 3) { 
-                cout << left << setw(4) << ++rowNumber << "- ";
-                m_lineup[i]->write(clog) << endl;
+                clog << left << setw(4) << ++rowNumber << "- " << *m_lineup[i] << endl;
                 isEmpty = false;
             }
         }
 
         if (isEmpty) {
-            cout << "The lineup is empty!\n";
+            cout << "The lineup is empty!" << endl;
         }
 
-        cout << "-------------------------------------------------------------------------------\n";
+        cout << "-------------------------------------------------------------------------------" << endl;
     }
 
 }
