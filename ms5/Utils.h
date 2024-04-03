@@ -49,6 +49,20 @@ namespace seneca {
       /// <returns> &gt;0 if s1 &gt; s2  OR  &lt;0 if s1 &lt; s2 OR 0 if s1 = s2</returns>
       int strcmp(const char* s1, const char* s2)const;
 
+      /// <summary>
+      /// get and foolproof int printing "Bad integer value, try again: " for error message. 
+      /// </summary>
+      /// <returns>integer entered from console</returns>
+      int getInt()const;
+
+      /// <summary>
+      /// uses int getint()const to get an int and if it is not between the min and max values it will print <br />"Invalid value enterd, retry[100000000 <= value <= 999999999]: "
+      /// </summary>
+      /// <param name="min">minimum acceptable value</param>
+      /// <param name="max">maximum acceptable value</param>
+      /// <returns></returns>
+      int getInt(int min, int max)const;
+
       template <typename type>
       void removeDynamicElement(type* array[], int index, int& size) {
           delete array[index];
