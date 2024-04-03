@@ -118,11 +118,6 @@ namespace seneca {
 
             cout << "OHIP: ";
             m_OHIP = U.getInt(100000000, 999999999);
-            
-            //when i remove line 125 m_ticket.read(istr);, it put the correct output for ticket number but
-            // i dont think it's through the ticket read bc it doesnt read the time
-            //when i not comment line 139, it asks me to enter console input for m_number
-         
         }
         else {
             char tempName[100];

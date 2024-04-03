@@ -95,7 +95,7 @@ namespace seneca {
             }
         }
         int averageWaitTime = (type == 'C' ? m_averCovidWait : m_averTriageWait);
-        return (count + 1) * averageWaitTime;
+        return count * averageWaitTime;
     }
 
     void PreTriage::setAverageWaitTime(const Patient& p) {
