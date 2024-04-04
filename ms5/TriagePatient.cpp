@@ -62,10 +62,10 @@ namespace seneca {
         symptoms = new char[strlen(tempSymptoms) + 1];
         strcpy(symptoms, tempSymptoms);
     }
-   /* if (istr.fail()) {
+    if (istr.fail()) {
         delete[] symptoms;
         symptoms = nullptr;
-    }*/
+    }
     return istr;
 }
 }

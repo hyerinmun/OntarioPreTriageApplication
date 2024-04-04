@@ -54,15 +54,13 @@ namespace seneca {
             if (!file.eof() && recordsRead == MAX_NO_OF_PATIENTS) {
                 cout << "Warning: number of records exceeded " << MAX_NO_OF_PATIENTS << endl;
             }
-            else if (recordsRead == 0) {
+            
+            if (recordsRead == 0) {
                 cout << "No data or bad data file!" << endl;
             }
             else {
                 cout << recordsRead << " Records imported..." << endl;
             }
-        }
-        else {
-            cout << "No data or bad data file!" << endl;
         }
         cout << endl;
     }
