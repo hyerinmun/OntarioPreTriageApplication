@@ -52,9 +52,9 @@ namespace seneca {
         symptoms = new char[strlen(tempSymptoms) + 1];
         strcpy(symptoms, tempSymptoms);
 
-        if (number() >= nextTriageTicket) {
+        //if (number() >= nextTriageTicket) {
             nextTriageTicket = number() + 1;
-        }
+        //}
     }
     else {
         cout << "Symptoms: ";
