@@ -1,15 +1,14 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <cstring> 
-#include <iostream> 
 #include "IOAble.h"
 
 using namespace seneca;
+using namespace std;
 
 namespace seneca {
-    std::ostream& operator<<(std::ostream& ostr, const IOAble& IO) {
+    ostream& operator<<(ostream& ostr, const IOAble& IO) {
         return IO.write(ostr);
     }
-    std::istream& operator>>(std::istream& istr, IOAble& IO) {
+    istream& operator>>(istream& istr, IOAble& IO) {
         return IO.read(istr);
     }
 }

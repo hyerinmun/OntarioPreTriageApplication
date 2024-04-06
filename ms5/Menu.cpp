@@ -3,24 +3,23 @@
 #include <iostream> 
 #include "Menu.h"
 
+using namespace std;
 using namespace seneca;
 
 namespace seneca {
-    Menu::Menu(const char* menuContent, int numberOfTabs):m_tabs(numberOfTabs){
+    Menu::Menu(const char* menuContent, int numberOfTabs) :m_tabs(numberOfTabs) {
         if (menuContent != nullptr) {
             m_text = new char[strlen(menuContent) + 1];
             strcpy(m_text, menuContent);
-
         }
         else {
             m_text = nullptr;
         }
         m_numOptions = 0;
-            for (const char* p = menuContent; *p; p++) {
-               m_numOptions += (*p == '\n');
-            }
+        for (const char* p = menuContent; *p; p++) {
+            m_numOptions += (*p == '\n');
         }
-    
+    }
 
     Menu::~Menu() {
         delete[] m_text;
@@ -34,7 +33,7 @@ namespace seneca {
             while (*p) {
                 if (isNewLine && m_tabs > 0) {
                     for (int i = 0; i < m_tabs; i++) {
-                        ostr << ' '; 
+                        ostr << ' ';
                     }
                     isNewLine = false;
                 }
@@ -50,12 +49,12 @@ namespace seneca {
             ostr << endl;
             if (m_tabs > 0) {
                 for (int i = 0; i < m_tabs; i++) {
-                    ostr << ' '; 
+                    ostr << ' ';
                 }
             }
             ostr << "0- Exit" << endl;
             for (int i = 0; i < m_tabs; i++) {
-                ostr << ' '; 
+                ostr << ' ';
             }
             ostr << "> ";
         }

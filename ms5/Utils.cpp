@@ -17,7 +17,7 @@
 #include "Time.h"
 using namespace std;
 namespace seneca {
-   // start provided code
+    
    bool debug = false;
    Utils U;
    int Utils::getTime() {
@@ -68,5 +68,64 @@ namespace seneca {
        return val;
    }
 
+   size_t Utils::strlen(const char* str) {
+       size_t len{};
+       while (str[len]) {
+           len++;
+       }
+       return len;
+   }
+   char* Utils::strcpy(char* des, const char* src) {
+       int i;
+       for (i = 0; src[i]; i++) {
+           des[i] = src[i];
+       }
+       des[i] = 0;
+       return des;
+   }
+
+    char* Utils::strcpy(char* des, const char* src, size_t len) {
+    size_t i;
+    for (i = 0; src[i] && i < len; i++) {
+        des[i] = src[i];
+    }
+    des[i] = 0;
+    return des;
+    }
+
+   void Utils::aloCopy(char*& des, const char* src) {
+       delete[] des;
+       des = nullptr;
+       if (src) {
+           des = new char[U.strlen(src) + 1];
+           U.strcpy(des, src);
+       }
+   }
+
+   bool Utils::getDynCstr(char*& str, istream& istr, char delimiter) {
+       delete[] str;
+       str = nullptr;
+       char buf[1000];
+       istr.getline(buf, 1000, delimiter);
+       if (istr) {
+           str = new char[this->strlen(buf) + 1];
+           this->strcpy(str, buf);
+       }
+       else {
+           istr.clear();
+           istr.ignore(1000, '\n');
+       }
+       return bool(str);
+   }
+
+   void Utils::getCstr(char* str, size_t len) {
+       cin.getline(str, len + 1);
+       while (cin.fail()) {
+           cout << "Maximum " << len << " chars!, retry\n> ";
+           cin.clear();
+           cin.ignore(12000, '\n');
+           cin.getline(str, len + 1);
+       }
+   }
    // end provided code
 }

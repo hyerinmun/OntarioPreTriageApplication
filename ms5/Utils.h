@@ -63,6 +63,18 @@ namespace seneca {
       /// <returns></returns>
       int getInt(int min, int max)const;
 
+      size_t strlen(const char* str);
+
+      char* strcpy(char* des, const char* src);
+
+      char* strcpy(char* des, const char* src, size_t len);
+
+      void aloCopy(char*& des, const char* src);
+
+      void getCstr(char* str, size_t len);
+
+      bool getDynCstr(char*& str, std::istream& istr, char delimiter);
+
       template <typename type>
       void removeDynamicElement(type* array[], int index, int& size) {
           delete array[index];

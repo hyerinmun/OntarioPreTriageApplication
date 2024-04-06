@@ -104,7 +104,7 @@ namespace seneca {
         return ostr;
     }
 
-   istream& Patient::read(istream& istr) {
+    istream& Patient::read(istream& istr) {
         if (&istr == &cin) {
             char buffer[51];
             cout << "Name: ";
@@ -125,7 +125,7 @@ namespace seneca {
             delete[] m_name;
             m_name = new char[strlen(tempName) + 1];
             strcpy(m_name, tempName);
-            istr.ignore(1000, ','); 
+            istr.ignore(1000, ',');
 
             // Read OHIP
             istr >> m_OHIP;
@@ -137,10 +137,10 @@ namespace seneca {
             }
             istr.ignore(1000, ',');
 
-           
+
         }
         m_ticket.read(istr);
         return istr;
-   }
+    }
 
 }

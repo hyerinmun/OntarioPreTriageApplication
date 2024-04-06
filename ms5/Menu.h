@@ -3,8 +3,6 @@
 #include <iostream>
 #include "Utils.h"
 
-using namespace std;
-
 namespace seneca {
     class Menu {
         char* m_text; 
@@ -13,13 +11,10 @@ namespace seneca {
     public:
         Menu(const char* menuContent, int numberOfTabs = 0);
         ~Menu();
-
         Menu(const Menu&) = delete; 
         Menu& operator=(const Menu&) = delete; 
-
-        ostream& display(ostream& ostr = cout) const;
+        std::ostream& display(std::ostream& ostr = std::cout) const;
         int& operator>>(int& selection); 
     };
 }
-
 #endif //SENECA_MENU_H
