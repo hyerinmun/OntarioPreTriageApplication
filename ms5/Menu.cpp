@@ -1,5 +1,4 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <cstring> 
 #include <iostream> 
 #include "Menu.h"
 
@@ -9,8 +8,8 @@ using namespace seneca;
 namespace seneca {
     Menu::Menu(const char* menuContent, int numberOfTabs) :m_tabs(numberOfTabs) {
         if (menuContent != nullptr) {
-            m_text = new char[strlen(menuContent) + 1];
-            strcpy(m_text, menuContent);
+            m_text = new char[U.strlen(menuContent) + 1];
+            U.strcpy(m_text, menuContent);
         }
         else {
             m_text = nullptr;

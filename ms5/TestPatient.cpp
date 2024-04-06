@@ -1,6 +1,6 @@
 #include "TestPatient.h"
-using namespace std;
 
+using namespace std;
 namespace seneca {
     int TestPatient::nextTestTicket = 1;
 
@@ -11,7 +11,6 @@ namespace seneca {
     char TestPatient::type() const {
         return 'C';
     }
-
 
     ostream& TestPatient::write(ostream& ostr) const {
         if (&ostr == &cout) {
@@ -28,6 +27,4 @@ namespace seneca {
         }
         return istr;
     }
- 
-   
 }

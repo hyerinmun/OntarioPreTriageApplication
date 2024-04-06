@@ -1,5 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <cstring>
 #include <fstream> 
 #include <iomanip>
 #include "PreTriage.h"
@@ -10,7 +8,6 @@
 #include "IOAble.h"
 
 using namespace std;
-
 using namespace seneca;
 
 namespace seneca {
@@ -31,7 +28,7 @@ namespace seneca {
             int recordsRead = 0;
 
             while (file >> type && recordsRead < MAX_NO_OF_PATIENTS) {
-                file.ignore();  // Ignore the comma
+                file.ignore(); 
 
                 if (type == 'C') {
                     patient = new TestPatient();
@@ -39,28 +36,29 @@ namespace seneca {
                 else if (type == 'T') {
                     patient = new TriagePatient();
                 }
-
                 if (patient != nullptr) {
                     if (patient->read(file)) {
                         m_lineup[m_lineupSize++] = patient;
                         recordsRead++;
                     }
                     else {
-                        delete patient;  // If reading failed, clean up
+                        delete patient; 
                     }
                 }
             }
-
             if (!file.eof() && recordsRead == MAX_NO_OF_PATIENTS) {
                 cout << "Warning: number of records exceeded " << MAX_NO_OF_PATIENTS << endl;
+                cout << recordsRead << " Records imported..." << endl;
             }
-            
-            if (recordsRead == 0) {
-                cout << "No data or bad data file!" << endl;
+            else if (recordsRead == 0) {
+                cout << "No data or bad data file!\n";
             }
             else {
                 cout << recordsRead << " Records imported..." << endl;
             }
+        }
+        else {
+            cout << "No data or bad data file!\n";
         }
         cout << endl;
     }
@@ -85,7 +83,7 @@ namespace seneca {
 
     int PreTriage::getWaitTime(const Patient& p) const {
         int count = 0;
-        char type = p.type(); 
+        char type = p.type();
 
         for (int i = 0; i < m_lineupSize; ++i) {
             if (m_lineup[i]->type() == type) {
@@ -97,11 +95,11 @@ namespace seneca {
     }
 
     void PreTriage::setAverageWaitTime(const Patient& p) {
-        Time CT; 
-        CT.reset(); 
-        Time PTT = p.time(); 
-        int PTN = p.number(); 
-        Time& AWT = (p.type() == 'C' ? m_averCovidWait : m_averTriageWait); 
+        Time CT;
+        CT.reset();
+        Time PTT = p.time();
+        int PTN = p.number();
+        Time& AWT = (p.type() == 'C' ? m_averCovidWait : m_averTriageWait);
 
         AWT = ((CT - PTT) + (AWT * (PTN - 1))) / PTN;
 
@@ -119,12 +117,12 @@ namespace seneca {
                 return i;
             }
         }
-        return -1; 
+        return -1;
     }
 
     PreTriage::PreTriage(const char* dataFilename) : m_averCovidWait(15), m_averTriageWait(5), m_lineupSize(0) {
-        m_dataFilename = new char[strlen(dataFilename) + 1];
-        strcpy(m_dataFilename, dataFilename);
+        m_dataFilename = new char[U.strlen(dataFilename) + 1];
+        U.strcpy(m_dataFilename, dataFilename);
         for (int i = 0; i < MAX_NO_OF_PATIENTS; i++) {
             m_lineup[i] = nullptr;
         }
@@ -138,7 +136,6 @@ namespace seneca {
         }
         delete[] m_dataFilename;
     }
-
 
     void PreTriage::run() {
         int selection;
@@ -157,7 +154,6 @@ namespace seneca {
                 break;
             }
         } while (selection != 0);
-        //cout << "Exiting the program.\n";
     }
 
     void PreTriage::registerPatient() {
@@ -180,13 +176,13 @@ namespace seneca {
             break;
         default:
             cout << "Invalid selection. Returning to main menu." << endl;
-            return; 
+            return;
         }
 
         patient->setArrivalTime();
 
         cout << "Please enter patient information: " << endl;
-        cin >> *patient; 
+        cin >> *patient;
         cin.clear();
 
         int waitTimeMinutes = getWaitTime(*patient);
@@ -197,9 +193,8 @@ namespace seneca {
             << "Estimated Wait Time: " << waitTimeFormatted << endl
             << "******************************************\n\n";
 
-        m_lineup[m_lineupSize++] = patient; 
+        m_lineup[m_lineupSize++] = patient;
     }
-
 
     void PreTriage::admitPatient() {
         int selection = 0;
@@ -220,7 +215,7 @@ namespace seneca {
         }
 
         Time currentTime;
-        currentTime.reset();  
+        currentTime.reset();
 
         cout << "\n******************************************\n";
         cout << "Call time: " << "[" << currentTime << "]";
@@ -236,23 +231,22 @@ namespace seneca {
         m_lineup[--m_lineupSize] = nullptr;
     }
 
-
     void PreTriage::lineUp() const {
         int selection = 0;
         Menu lineupMenu("Select The Lineup:\n1- Contagion Test\n2- Triage", 3);
         lineupMenu >> selection;
 
-        if (selection == 0) return; 
+        if (selection == 0) return;
 
-        char type = selection == 1 ? 'C' : 'T'; 
+        char type = selection == 1 ? 'C' : 'T';
 
         cout << "Row - Patient name                                          OHIP     Tk #  Time" << endl;
         cout << "-------------------------------------------------------------------------------" << endl;
 
-        bool isEmpty = true; 
+        bool isEmpty = true;
         int rowNumber = 0;
         for (int i = 0; i < m_lineupSize; i++) {
-            if (*m_lineup[i] == type || selection == 3) { 
+            if (*m_lineup[i] == type || selection == 3) {
                 clog << left << setw(4) << ++rowNumber << "- " << *m_lineup[i] << endl;
                 isEmpty = false;
             }
@@ -261,8 +255,6 @@ namespace seneca {
         if (isEmpty) {
             cout << "The lineup is empty!" << endl;
         }
-
         cout << "-------------------------------------------------------------------------------" << endl;
     }
-
 }

@@ -1,8 +1,7 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <cstring>
 #include <iostream>
 #include <fstream>
 #include "TriagePatient.h"
+#include "Utils.h"
 
 using namespace std;
 
@@ -42,25 +41,20 @@ namespace seneca {
     delete[] symptoms;
     symptoms = nullptr;
 
-    Patient::read(istr); // Call base class's read function
+    Patient::read(istr); 
 
     char tempSymptoms[512];
     if (&istr != &cin) {
         istr.ignore(1000, ',');
         istr.getline(tempSymptoms, 512, '\n');
 
-        symptoms = new char[strlen(tempSymptoms) + 1];
-        strcpy(symptoms, tempSymptoms);
-
-        //if (number() >= nextTriageTicket) {
-            nextTriageTicket = number() + 1;
-        //}
+        U.aloCopy(symptoms, tempSymptoms);
+        nextTriageTicket = number() + 1;
     }
     else {
         cout << "Symptoms: ";
         istr.getline(tempSymptoms, 512);
-        symptoms = new char[strlen(tempSymptoms) + 1];
-        strcpy(symptoms, tempSymptoms);
+        U.aloCopy(symptoms, tempSymptoms);
     }
     if (istr.fail()) {
         delete[] symptoms;

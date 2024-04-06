@@ -1,5 +1,4 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <cstring>
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -15,8 +14,7 @@ namespace seneca {
 
     Patient::Patient(const Patient& src) : m_name(nullptr), m_OHIP(src.m_OHIP), m_ticket(src.m_ticket), m_fileIO(src.m_fileIO) {
         if (src.m_name != nullptr) {
-            m_name = new char[strlen(src.m_name) + 1];
-            strcpy(m_name, src.m_name);
+            U.aloCopy(m_name, src.m_name);
         }
         else {
             m_name = nullptr;
@@ -24,14 +22,13 @@ namespace seneca {
     }
     Patient& Patient::operator=(const Patient& src) {
         if (this != &src) {
-            delete[] m_name; // Free existing resource
+            delete[] m_name; 
             m_ticket = src.m_ticket;
             m_fileIO = src.m_fileIO;
             m_OHIP = src.m_OHIP;
 
             if (src.m_name != nullptr) {
-                m_name = new char[strlen(src.m_name) + 1];
-                strcpy(m_name, src.m_name);
+               U.aloCopy(m_name, src.m_name);
             }
             else {
                 m_name = nullptr;
@@ -44,7 +41,6 @@ namespace seneca {
         delete[] m_name;
     }
 
-
     bool Patient::operator==(char c) const {
         return type() == c;
     }
@@ -52,7 +48,6 @@ namespace seneca {
     bool Patient::operator==(const Patient& other) const {
         return type() == other.type();
     }
-
 
     void Patient::setArrivalTime() {
         m_ticket.resetTime();
@@ -75,13 +70,13 @@ namespace seneca {
     }
 
     ostream& Patient::write(ostream& ostr) const {
-        if (*this) { // Valid patient
+        if (*this) { 
             if (&ostr == &cout) {
                 m_ticket.write(ostr) << endl;
-                if (strlen(m_name) > 50) {
+                if (U.strlen(m_name) > 50) {
                     char truncatedName[51];
-                    strncpy(truncatedName, m_name, 50);
-                    truncatedName[50] = '\0'; // Ensure null termination
+                    U.strcpy(truncatedName, m_name, 50);
+                    truncatedName[50] = '\0'; 
                     ostr << truncatedName;
                 }
                 else {
@@ -93,7 +88,7 @@ namespace seneca {
                 ostr << left << setw(53) << setfill('.') << m_name
                     << right << setw(9) << m_OHIP << setfill(' ') << setw(5) << m_ticket.number() << " " << m_ticket.time();
             }
-            else { // For other ostream types, write CSV format
+            else { 
                 ostr << type() << ',' << m_name << ',' << m_OHIP << ',';
                 m_ticket.write(ostr);
             }
@@ -112,9 +107,7 @@ namespace seneca {
             istr.clear();
             istr.ignore(1000, '\n');
 
-            delete[] m_name;
-            m_name = new char[strlen(buffer) + 1];
-            strcpy(m_name, buffer);
+            U.aloCopy(m_name, buffer);
 
             cout << "OHIP: ";
             m_OHIP = U.getInt(100000000, 999999999);
@@ -122,12 +115,9 @@ namespace seneca {
         else {
             char tempName[100];
             istr.get(tempName, 100, ',');
-            delete[] m_name;
-            m_name = new char[strlen(tempName) + 1];
-            strcpy(m_name, tempName);
+            U.aloCopy(m_name, tempName);
             istr.ignore(1000, ',');
 
-            // Read OHIP
             istr >> m_OHIP;
             if (istr.fail() || m_OHIP < 100000000 || m_OHIP > 999999999) {
                 delete[] m_name;
@@ -136,11 +126,8 @@ namespace seneca {
                 istr.clear();
             }
             istr.ignore(1000, ',');
-
-
         }
         m_ticket.read(istr);
         return istr;
     }
-
 }

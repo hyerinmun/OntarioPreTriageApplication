@@ -1,6 +1,5 @@
 #ifndef SENECA_PRETRIAGE_H
 #define SENECA_PRETRIAGE_H
-
 #include "Patient.h"
 #include "Time.h"
 
@@ -21,7 +20,6 @@ namespace seneca {
         void setAverageWaitTime(const Patient& p);
         int indexOfFirstInLine(char type) const;
 
-
     public:
         PreTriage(const char* dataFilename);
         ~PreTriage();
@@ -31,5 +29,4 @@ namespace seneca {
         void lineUp() const;
     };
 }
-
 #endif // SENECA_PRETRIAGE_H

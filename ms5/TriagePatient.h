@@ -2,8 +2,6 @@
 #define SENECA_TRIAGEPATIENT_H
 #include "Patient.h"
 
-using namespace std;
-
 namespace seneca {
     class TriagePatient : public Patient {
         static int nextTriageTicket;
@@ -12,12 +10,9 @@ namespace seneca {
     public:
         TriagePatient();
         ~TriagePatient();
-
         virtual char type() const;
-
-        virtual ostream& write(ostream& ostr) const override;
-        virtual istream& read(istream& istr) override;
+        virtual std::ostream& write(std::ostream& ostr = std::cout) const override;
+        virtual std::istream& read(std::istream& istr = std::cin) override;
     };
 }
-
 #endif

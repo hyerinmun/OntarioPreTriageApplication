@@ -71,6 +71,8 @@ namespace seneca {
 
       void aloCopy(char*& des, const char* src);
 
+      void aloCopy(char*& des, const char* src, size_t maxLen);
+
       void getCstr(char* str, size_t len);
 
       bool getDynCstr(char*& str, std::istream& istr, char delimiter);

@@ -85,12 +85,12 @@ namespace seneca {
    }
 
     char* Utils::strcpy(char* des, const char* src, size_t len) {
-    size_t i;
-    for (i = 0; src[i] && i < len; i++) {
-        des[i] = src[i];
-    }
-    des[i] = 0;
-    return des;
+        size_t i;
+        for (i = 0; src[i] && i < len; i++) {
+            des[i] = src[i];
+        }
+        des[i] = 0;
+        return des;
     }
 
    void Utils::aloCopy(char*& des, const char* src) {
@@ -99,6 +99,16 @@ namespace seneca {
        if (src) {
            des = new char[U.strlen(src) + 1];
            U.strcpy(des, src);
+       }
+   }
+
+   void Utils::aloCopy(char*& des, const char* src, size_t maxLen) {
+       delete[] des;
+       des = nullptr;
+       if (src) {
+           size_t len = U.strlen(src);
+           des = new char[(len < maxLen ? len : maxLen) + 1];
+           U.strcpy(des, src, maxLen);
        }
    }
 
