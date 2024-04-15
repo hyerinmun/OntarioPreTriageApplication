@@ -9,7 +9,6 @@ namespace seneca {
         int m_OHIP; 
         Ticket m_ticket;
         bool m_fileIO;
-
     public:
         Patient(int ticketNumber = 0, bool fileIO = false); 
         Patient(const Patient& src);

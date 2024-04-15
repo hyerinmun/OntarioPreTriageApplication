@@ -1,5 +1,4 @@
 #include "TestPatient.h"
-
 using namespace std;
 namespace seneca {
     int TestPatient::nextTestTicket = 1;

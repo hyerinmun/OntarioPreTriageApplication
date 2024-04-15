@@ -6,12 +6,9 @@
 #include "TriagePatient.h"
 #include "Menu.h"
 #include "IOAble.h"
-
 using namespace std;
-using namespace seneca;
 
 namespace seneca {
-
     void PreTriage::load() {
         cout << "Loading data..." << endl;
 
@@ -73,10 +70,8 @@ namespace seneca {
         for (int i = 0; i < m_lineupSize; i++) {
             if (m_lineup[i]->type() == 'C') ++cntContagion;
             else if (m_lineup[i]->type() == 'T') ++cntTriage;
-
             m_lineup[i]->write(file) << endl;
         }
-
         cout << cntContagion << " Contagion Tests and "
             << cntTriage << " Triage records were saved!" << endl;
     }

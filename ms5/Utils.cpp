@@ -112,6 +112,16 @@ namespace seneca {
        }
    }
 
+   void Utils::getCstr(char* str, size_t len) {
+       cin.getline(str, len + 1);
+       while (cin.fail()) {
+           cout << "Maximum " << len << " chars!, retry\n> ";
+           cin.clear();
+           cin.ignore(12000, '\n');
+           cin.getline(str, len + 1);
+       }
+   }
+
    bool Utils::getDynCstr(char*& str, istream& istr, char delimiter) {
        delete[] str;
        str = nullptr;
@@ -126,16 +136,6 @@ namespace seneca {
            istr.ignore(1000, '\n');
        }
        return bool(str);
-   }
-
-   void Utils::getCstr(char* str, size_t len) {
-       cin.getline(str, len + 1);
-       while (cin.fail()) {
-           cout << "Maximum " << len << " chars!, retry\n> ";
-           cin.clear();
-           cin.ignore(12000, '\n');
-           cin.getline(str, len + 1);
-       }
    }
    // end provided code
 }

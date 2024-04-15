@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Ticket.h"
-
 using namespace std;
 
 namespace seneca {

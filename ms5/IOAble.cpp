@@ -1,7 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "IOAble.h"
-
-using namespace seneca;
 using namespace std;
 
 namespace seneca {

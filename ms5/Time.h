@@ -4,7 +4,6 @@
 namespace seneca {
     class Time {
         unsigned int minutes;
-
     public:
         Time& reset();
         Time(unsigned int min = 0u);
@@ -15,7 +14,6 @@ namespace seneca {
         Time& operator-=(const Time& D);
         Time operator-(const Time& T) const;
     };
-
     std::ostream& operator<<(std::ostream& ostr, const Time& time);
     std::istream& operator>>(std::istream& istr, Time& time);
 }

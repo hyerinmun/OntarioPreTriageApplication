@@ -1,9 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream> 
 #include "Menu.h"
-
 using namespace std;
-using namespace seneca;
 
 namespace seneca {
     Menu::Menu(const char* menuContent, int numberOfTabs) :m_tabs(numberOfTabs) {
@@ -36,15 +34,12 @@ namespace seneca {
                     }
                     isNewLine = false;
                 }
-
                 if (*p == '\n') {
                     isNewLine = true;
                 }
-
                 ostr << *p;
                 p++;
             }
-
             ostr << endl;
             if (m_tabs > 0) {
                 for (int i = 0; i < m_tabs; i++) {
@@ -60,11 +55,9 @@ namespace seneca {
         return ostr;
     }
 
-
     int& Menu::operator>>(int& selection) {
         display();
         selection = U.getInt(0, m_numOptions);
-
         return selection;
     }
 }

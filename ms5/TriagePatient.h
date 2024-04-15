@@ -6,7 +6,6 @@ namespace seneca {
     class TriagePatient : public Patient {
         static int nextTriageTicket;
         char* symptoms;
-
     public:
         TriagePatient();
         ~TriagePatient();

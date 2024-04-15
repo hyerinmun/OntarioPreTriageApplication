@@ -1,4 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -8,7 +7,6 @@
 
 using namespace std;
 namespace seneca {
-
     Patient::Patient(int ticketNumber, bool fileIO) : m_name(nullptr), m_OHIP(0), m_ticket(ticketNumber), m_fileIO(fileIO) {
     }
 
@@ -20,6 +18,7 @@ namespace seneca {
             m_name = nullptr;
         }
     }
+
     Patient& Patient::operator=(const Patient& src) {
         if (this != &src) {
             delete[] m_name; 

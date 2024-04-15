@@ -2,7 +2,6 @@
 #include <fstream>
 #include "TriagePatient.h"
 #include "Utils.h"
-
 using namespace std;
 
 namespace seneca {
@@ -37,29 +36,28 @@ namespace seneca {
     }
 
     istream& TriagePatient::read(istream& istr) {
-   
-    delete[] symptoms;
-    symptoms = nullptr;
-
-    Patient::read(istr); 
-
-    char tempSymptoms[512];
-    if (&istr != &cin) {
-        istr.ignore(1000, ',');
-        istr.getline(tempSymptoms, 512, '\n');
-
-        U.aloCopy(symptoms, tempSymptoms);
-        nextTriageTicket = number() + 1;
-    }
-    else {
-        cout << "Symptoms: ";
-        istr.getline(tempSymptoms, 512);
-        U.aloCopy(symptoms, tempSymptoms);
-    }
-    if (istr.fail()) {
         delete[] symptoms;
         symptoms = nullptr;
+
+        Patient::read(istr); 
+
+        char tempSymptoms[512];
+        if (&istr != &cin) {
+            istr.ignore(1000, ',');
+            istr.getline(tempSymptoms, 512, '\n');
+
+            U.aloCopy(symptoms, tempSymptoms);
+            nextTriageTicket = number() + 1;
+        }
+        else {
+            cout << "Symptoms: ";
+            istr.getline(tempSymptoms, 512);
+            U.aloCopy(symptoms, tempSymptoms);
+        }
+        if (istr.fail()) {
+            delete[] symptoms;
+            symptoms = nullptr;
+        }
+        return istr;
     }
-    return istr;
-}
 }

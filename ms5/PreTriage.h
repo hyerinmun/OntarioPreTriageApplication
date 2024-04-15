@@ -2,10 +2,8 @@
 #define SENECA_PRETRIAGE_H
 #include "Patient.h"
 #include "Time.h"
-
 namespace seneca {
     const int MAX_NO_OF_PATIENTS = 100;
-
     class PreTriage {
         Time m_averCovidWait;
         Time m_averTriageWait;
@@ -19,7 +17,6 @@ namespace seneca {
         int getWaitTime(const Patient& p) const;
         void setAverageWaitTime(const Patient& p);
         int indexOfFirstInLine(char type) const;
-
     public:
         PreTriage(const char* dataFilename);
         ~PreTriage();
